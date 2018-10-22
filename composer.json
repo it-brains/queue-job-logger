@@ -1,0 +1,52 @@
+{
+    "name": "it-brains/queue-job-logger",
+    "description": "A package for logging job's activities",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bogdan Revyakin",
+            "email": "b.revyakin93@gmail.com",
+            "homepage": "http://it-brains.org",
+            "role": "Developer"
+        }
+    ],
+    "homepage": "https://github.com/it-brains/queue-job-logger",
+    "keywords": [
+        "Laravel",
+        "QueueJobLogger",
+        "Queue",
+        "Logger"
+    ],
+    "require": {
+        "illuminate/support": "~5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~7.0",
+        "mockery/mockery": "^1.1",
+        "orchestra/testbench": "~3.0",
+        "sempro/phpunit-pretty-print": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ITBrains\\QueueJobLogger\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ITBrains\\QueueJobLogger\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ITBrains\\QueueJobLogger\\QueueJobLoggerServiceProvider"
+            ],
+            "aliases": {
+                "QueueJobLogger": "ITBrains\\QueueJobLogger\\Facades\\QueueJobLogger"
+            }
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}
