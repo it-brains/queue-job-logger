@@ -15,6 +15,11 @@ class QueueJobLogger
         TYPE_PROCESSED = 'processed',
         TYPE_FAILED = 'failed';
 
+    /**
+     * @param $event
+     * @param string $type
+     * @throws Exception
+     */
     public function set($event, string $type): void
     {
         try {
@@ -28,9 +33,10 @@ class QueueJobLogger
                 'payload' => json_encode($event->job->payload()),
                 'exception' => $this->getException($event),
                 'execution_time' => $this->getExecutionTime($event->job, $type),
+                'created_at' =>  Carbon::now()->toDateTimeString(),
             ]);
         } catch(Exception $exception) {
-            Log::error($exception->getMessage(), compact('exception'));
+            $this->logException($exception);
         }
     }
 
@@ -65,5 +71,19 @@ class QueueJobLogger
             'message' => $event->exception->getMessage(),
             'trace' => $event->exception->getTraceAsString(),
         ]);
+    }
+
+    /**
+     * @param Exception $exception
+     * @return mixed
+     * @throws Exception
+     */
+    public function logException(Exception $exception)
+    {
+        if (app()->runningInConsole()) {
+            throw new Exception($exception->getMessage());
+        }
+
+        Log::error($exception->getMessage(), compact('exception'));
     }
 }
