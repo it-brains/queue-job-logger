@@ -75,7 +75,7 @@ class QueueJobLogger
 
     /**
      * @param Exception $exception
-     * @return mixed
+     * @return void
      * @throws Exception
      */
     public function logException(Exception $exception)

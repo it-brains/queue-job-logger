@@ -115,10 +115,10 @@ class QueueJobLoggerTest extends TestCase
                     QueueJobLogger::TYPE_PROCESSED,
                     QueueJobLogger::TYPE_FAILED
                 ]),
-                'name' => str_random(),
+                'name' => substr(md5(mt_rand()), 0, 7),
                 'attempts' => 0,
-                'queue' => str_random(),
-                'connection' => str_random(),
+                'queue' => substr(md5(mt_rand()), 0, 7),
+                'connection' => substr(md5(mt_rand()), 0, 7),
                 'payload' => '',
                 'exception' => null,
                 'execution_time' => null,
