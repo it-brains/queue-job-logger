@@ -54,7 +54,7 @@ class QueueJobLogger
 
         if (!$jobBefore) return null;
 
-        $duration = Carbon::now()->diffInSeconds(Carbon::parse($jobBefore->created_at));
+        $duration = (int) Carbon::now()->diffInSeconds(Carbon::parse($jobBefore->created_at));
 
         return gmdate('H:i:s', $duration);
     }
